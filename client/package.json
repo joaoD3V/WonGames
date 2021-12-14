@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prepare": "cd .. && husky install client/.husky",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -17,7 +18,7 @@
     "generate": "yarn plop --plopfile ./generators/plopfile.js",
     "test:ci": "jest --runInBand",
     "storybook": "start-storybook -s ./public -p 6006",
-    "build-storybook": "build-storybook -s ./public"
+    "build-storybook": "build-storybook. -s ./public"
   },
   "lint-staged": {
     "src/**/*": [
