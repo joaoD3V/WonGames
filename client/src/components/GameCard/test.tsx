@@ -5,15 +5,16 @@ import { renderWithTheme } from 'utils/tests/helpers';
 import GameCard from '.';
 
 const props = {
+  slug: 'population-zero',
   title: 'Population Zero',
   developer: 'Rockstar Games',
   img: 'https://source.unsplash.com/user/willianjusten/300x140',
-  price: 'R$ 235,00',
+  price: 235,
 };
 
 describe('<GameCard />', () => {
   it('should render correctly', () => {
-    renderWithTheme(<GameCard {...props} />);
+    const { container } = renderWithTheme(<GameCard {...props} />);
 
     expect(
       screen.getByRole('heading', { name: props.title })
@@ -28,26 +29,33 @@ describe('<GameCard />', () => {
       props.img
     );
 
+    expect(screen.getByRole('link', { name: props.title })).toHaveAttribute(
+      'href',
+      `/game/${props.slug}`
+    );
+
     expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument();
+
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should render price in label', () => {
     renderWithTheme(<GameCard {...props} />);
 
-    const price = screen.getByText('R$ 235,00');
+    const price = screen.getByText('$235.00');
 
     expect(price).not.toHaveStyle({ textDecoration: 'line-through' });
     expect(price).toHaveStyle({ backgroundColor: theme.colors.secondary });
   });
 
   it('should render a line-through in price when promotional', () => {
-    renderWithTheme(<GameCard {...props} promotionalPrice="R$ 15,00" />);
+    renderWithTheme(<GameCard {...props} promotionalPrice={15} />);
 
-    expect(screen.getByText('R$ 235,00')).toHaveStyle({
+    expect(screen.getByText('$235.00')).toHaveStyle({
       textDecoration: 'line-through',
     });
 
-    expect(screen.getByText('R$ 15,00')).not.toHaveStyle({
+    expect(screen.getByText('$15.00')).not.toHaveStyle({
       textDecoration: 'line-through',
     });
   });
@@ -60,10 +68,10 @@ describe('<GameCard />', () => {
 
   it('should call onFav method when favorite is clicked', () => {
     const onFav = jest.fn();
-
     renderWithTheme(<GameCard {...props} favorite onFav={onFav} />);
 
     fireEvent.click(screen.getAllByRole('button')[0]);
+
     expect(onFav).toBeCalled();
   });
 
