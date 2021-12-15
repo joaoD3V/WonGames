@@ -12,12 +12,14 @@ import Empty from 'components/Empty';
 
 export type WishlistTemplateProps = {
   games?: GameCardProps[];
+  recommendedTitle: string;
   recommendedGames: GameCardProps[];
   recommendedHighlight: HighlightProps;
 };
 
 export default function Whishlist({
   games = [],
+  recommendedTitle,
   recommendedGames,
   recommendedHighlight,
 }: WishlistTemplateProps) {
@@ -46,7 +48,7 @@ export default function Whishlist({
       </Container>
 
       <Showcase
-        title="You may like these games"
+        title={recommendedTitle}
         games={recommendedGames}
         highlight={recommendedHighlight}
       />
