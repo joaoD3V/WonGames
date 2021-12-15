@@ -11,24 +11,30 @@ import Base from 'templates/Base';
 
 export type HomeTemplateProps = {
   banners: BannerProps[];
+  newGamesTitle: string;
   newGames: GameCardProps[];
-  mostPopularHighlight: HighlightProps;
+  mostPopularGamesTitle: string;
   mostPopularGames: GameCardProps[];
-  upcommingGames: GameCardProps[];
-  upcommingHighlight: HighlightProps;
-  upcommingMoreGames: GameCardProps[];
+  mostPopularHighlight: HighlightProps;
+  upcomingGamesTitle: string;
+  upcomingGames: GameCardProps[];
+  upcomingHighlight: HighlightProps;
+  freeGamesTitle: string;
   freeGames: GameCardProps[];
   freeHighlight: HighlightProps;
 };
 
 export default function Home({
   banners,
+  newGamesTitle,
   newGames,
+  mostPopularGamesTitle,
   mostPopularHighlight,
   mostPopularGames,
-  upcommingGames,
-  upcommingHighlight,
-  upcommingMoreGames,
+  upcomingGamesTitle,
+  upcomingGames,
+  upcomingHighlight,
+  freeGamesTitle,
   freeGames,
   freeHighlight,
 }: HomeTemplateProps) {
@@ -41,22 +47,23 @@ export default function Home({
       </Container>
 
       <S.SectionNews>
-        <Showcase title="News" games={newGames} />
+        <Showcase title={newGamesTitle} games={newGames} color="black" />
       </S.SectionNews>
 
       <Showcase
-        title="Most Popular"
+        title={mostPopularGamesTitle}
         highlight={mostPopularHighlight}
         games={mostPopularGames}
       />
 
-      <S.SectionUpcoming>
-        <Showcase title="Upcoming" games={upcommingGames} />
-        <Showcase highlight={upcommingHighlight} games={upcommingMoreGames} />
-      </S.SectionUpcoming>
+      <Showcase
+        title={upcomingGamesTitle}
+        games={upcomingGames}
+        highlight={upcomingHighlight}
+      />
 
       <Showcase
-        title="Free games"
+        title={freeGamesTitle}
         highlight={freeHighlight}
         games={freeGames}
       />
