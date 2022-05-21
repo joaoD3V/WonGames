@@ -18,6 +18,7 @@ export const getStaticProps: GetStaticProps = async () => {
   } = await apolloClient.query<QueryHome, QueryHomeVariables>({
     query: QUERY_HOME,
     variables: { date: TODAY },
+    fetchPolicy: 'no-cache', //garantir sempre dado novo na geração do estático
   });
 
   return {
@@ -35,6 +36,6 @@ export const getStaticProps: GetStaticProps = async () => {
       freeGames: gamesMapper(freeGames),
       freeHighlight: highlightMapper(sections?.freeGames?.highlight),
     },
-    revalidate: 60,
+    revalidate: 10,
   };
 };
