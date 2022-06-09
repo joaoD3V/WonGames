@@ -72,6 +72,7 @@ export default function GamesTemplate({ filterItems }: GamesTemplateProps) {
                 {data?.games.map((game) => (
                   <GameCard
                     key={game.slug}
+                    id={game.id}
                     title={game.name}
                     slug={game.slug}
                     developer={game.developers[0].name}
